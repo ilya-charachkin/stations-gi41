@@ -139,5 +139,20 @@ public final class StationRegistry {
                 .toList();
     }
 
+    /**
+     * Возвращает станции, расположенные на расстоянии не более maxKm
+     * километров от Гомеля.
+     *
+     * @throws IllegalArgumentException если maxKm отрицательный
+     */
+    public List<Station> withinRadius(int maxKm) {
+        if (maxKm < 0) {
+            throw new IllegalArgumentException("Радиус не может быть отрицательным");
+        }
+
+        return stations.stream()
+                .filter(station -> station.distanceFromGomelKm() <= maxKm)
+                .toList();
+    }
     // новые методы добавляются в конец класса
 }
