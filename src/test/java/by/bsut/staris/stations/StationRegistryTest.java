@@ -469,6 +469,49 @@ class StationRegistryTest {
         assertEquals("| Станция Новая | GOMEL_KALINKOVICHI | PASSENGER | 30 |", lines.get(2));
     }
 
+    @Test
+    @DisplayName("withinRadius: возвращает станции в пределах заданного радиуса")
+    void withinRadiusReturnsStationsWithinRadius() {
+        StationRegistry registry = new StationRegistry();
+
+        List<Station> result = registry.withinRadius(50);
+
+        assertTrue(result.stream()
+                .allMatch(station -> station.distanceFromGomelKm() <= 50));
+        assertTrue(result.stream()
+                .anyMatch(station -> station.name().equals("Буда-Кошелёвская")));
+    }
+
+    @Test
+    @DisplayName("withinRadius: включает станции на границе радиуса")
+    void withinRadiusIncludesStationAtBoundary() {
+        StationRegistry registry = new StationRegistry();
+
+        List<Station> result = registry.withinRadius(45);
+
+        assertTrue(result.stream()
+                .anyMatch(station -> station.name().equals("Буда-Кошелёвская")));
+    }
+
+    @Test
+    @DisplayName("withinRadius: возвращает только станцию Гомель при нулевом радиусе")
+    void withinRadiusWithZeroReturnsGomelStation() {
+        StationRegistry registry = new StationRegistry();
+
+        List<Station> result = registry.withinRadius(0);
+
+        assertEquals(1, result.size());
+        assertEquals("Гомель-Пассажирский", result.get(0).name());
+    }
+
+    @Test
+    @DisplayName("withinRadius: выбрасывает исключение при отрицательном радиусе")
+    void withinRadiusThrowsExceptionForNegativeRadius() {
+        StationRegistry registry = new StationRegistry();
+
+        assertThrows(IllegalArgumentException.class,
+                () -> registry.withinRadius(-1));
+    }
 
     // тесты новых станций и методов добавляются в конец класса
 }
