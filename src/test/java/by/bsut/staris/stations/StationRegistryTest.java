@@ -513,5 +513,14 @@ class StationRegistryTest {
                 () -> registry.withinRadius(-1));
     }
 
+    @Test
+    @DisplayName("Справочник содержит станцию Носовичи с корректными атрибутами")
+    void containsNosovichi() {
+        Station nosovichi = station("Носовичи");
+        assertEquals(Line.GOMEL_BAKHMACH, nosovichi.line());
+        assertEquals(StationType.INTERMEDIATE, nosovichi.type());
+        assertEquals(26, nosovichi.distanceFromGomelKm());
+    }
+
     // тесты новых станций и методов добавляются в конец класса
 }
