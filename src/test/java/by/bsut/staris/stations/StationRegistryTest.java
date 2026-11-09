@@ -532,6 +532,13 @@ class StationRegistryTest {
     @DisplayName("findByType выбрасывает исключение при передаче null")
     void findByTypeThrowsExceptionForNull() {
         assertThrows(IllegalArgumentException.class, () -> registry.findByType(null));
+    @DisplayName("Справочник содержит станцию Носовичи с корректными атрибутами")
+    void containsNosovichi() {
+        Station nosovichi = station("Носовичи");
+        assertEquals(Line.GOMEL_BAKHMACH, nosovichi.line());
+        assertEquals(StationType.INTERMEDIATE, nosovichi.type());
+        assertEquals(26, nosovichi.distanceFromGomelKm());
+      main
     }
 
     // тесты новых станций и методов добавляются в конец класса
