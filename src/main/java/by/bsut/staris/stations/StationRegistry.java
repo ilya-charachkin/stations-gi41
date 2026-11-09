@@ -24,7 +24,8 @@ public final class StationRegistry {
                 new Station("Словечно", Line.GOMEL_KALINKOVICHI, StationType.INTERMEDIATE, 194),
                 new Station("Гомель-Сортировочный", Line.GOMEL_ZHLOBIN, StationType.MARSHALLING, 6),
                 new Station("Светлогорск-на-Березине", Line.ZHLOBIN_KALINKOVICHI, StationType.INTERMEDIATE, 124),
-		new Station("Буда-Кошелёвская", Line.GOMEL_ZHLOBIN, StationType.INTERMEDIATE, 45)
+                new Station("Буда-Кошелёвская", Line.GOMEL_ZHLOBIN, StationType.INTERMEDIATE, 45),
+                new Station("Носовичи", Line.GOMEL_BAKHMACH, StationType.INTERMEDIATE, 26)
                 // новые станции добавляются в конец списка
         );
     }
@@ -79,7 +80,7 @@ public final class StationRegistry {
                 .filter(station -> station.name().equalsIgnoreCase(normalizedName))
                 .findFirst();
     }
-    
+
     /**
      * Возвращает наименования станций с заданным префиксом без учёта регистра,
      * в алфавитном порядке.
